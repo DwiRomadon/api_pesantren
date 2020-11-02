@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/gambar', express.static(path.join(__dirname, 'gambar')))
 app.use('/pesantren', require('./routes/pesantren'))
+app.use('/history', require('./routes/history'))
 // app.use('/user', require('./routes/user'))
 
 app.listen(port, function () {

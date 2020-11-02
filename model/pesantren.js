@@ -6,6 +6,12 @@ const pesantren = mongoose.Schema({
     namaPesantren: {
         type: String
     },
+    email: String,
+    profile: String,
+    info: String,
+    pendidikan: String,
+    pemilik: String,
+    ekskul: String,
     nomorTelp: String,
     latitude: String,
     longitude: String,
@@ -14,9 +20,8 @@ const pesantren = mongoose.Schema({
         default: false
     },
     gambar: Array,
-    fasilitas: [{
-        nama: String
-    }],
+    gambar_icon: String,
+    fasilitas: String,
     akreditasi: String,
     nomorNspp: String,
     website: String

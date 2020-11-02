@@ -18,6 +18,36 @@ exports.inputData = (data, gambar) =>
         })
     })
 
+exports.inputLogo = (id, gambar) =>
+    new Promise(async (resolve, reject)=>{
+        console.log(gambar)
+        pesantren.updateOne({
+            _id: ObjectId(id)
+        },{
+            gambar_icon: gambar
+        })
+            .then(r=>{
+                resolve(response.commonSuccessMsgWithId('Berhasil menginput data'))
+            }).catch(err => {
+            reject(response.commonErrorMsg('Mohon Maaf Input Data Gagal'))
+        })
+    })
+
+exports.tambahGambar = (gambar, id) =>
+    new Promise(async (resolve, reject)=>{
+        console.log(id)
+        pesantren.updateOne({
+            _id: ObjectId(id)
+        },{
+             $push: {gambar: gambar}
+        })
+            .then(r=>{
+                resolve(response.commonSuccessMsgWithId('Berhasil menginput data'))
+            }).catch(err => {
+            reject(response.commonErrorMsg('Mohon Maaf Input Data Gagal'))
+        })
+    })
+
 exports.updateData = (data, id) =>
     new Promise(async (resolve, reject)=>{
         pesantren.update(
@@ -27,6 +57,36 @@ exports.updateData = (data, id) =>
         )
             .then(r=>{
                 resolve(response.commonSuccessMsg('Berhasil merubah data'))
+            }).catch(err => {
+            reject(response.commonErrorMsg('Mohon Maaf Input Data Gagal'))
+        })
+    })
+
+exports.updateDataPesantren = (data, id) =>
+    new Promise(async (resolve, reject)=>{
+        pesantren.update(
+            {
+                _id: ObjectId(id)
+            }, {
+                $set: data
+            }
+        )
+            .then(r=>{
+                resolve(response.commonSuccessMsg('Berhasil merubah data'))
+            }).catch(err => {
+            reject(response.commonErrorMsg('Mohon Maaf Input Data Gagal'))
+        })
+    })
+
+exports.hapusData = (id) =>
+    new Promise(async (resolve, reject)=>{
+        pesantren.deleteOne(
+            {
+                _id: ObjectId(id)
+            },
+        )
+            .then(r=>{
+                resolve(response.commonSuccessMsg('Berhasil menghapus data'))
             }).catch(err => {
             reject(response.commonErrorMsg('Mohon Maaf Input Data Gagal'))
         })
@@ -55,6 +115,12 @@ exports.getJarakPesantren = (data, radius) =>
                             longitude: r[i].longitude,
                             nomorNspp: r[i].nomorNspp,
                             website: r[i].website,
+                            gambar_icon: r[i].gambar_icon,
+                            profile: r[i].profile,
+                            info: r[i].info,
+                            pendidikan: r[i].pendidikan,
+                            ekskul: r[i].ekskul,
+                            pemilik: r[i].pemilik,
                         })
                     }
                     if (Number(radius) === 0){
@@ -70,6 +136,12 @@ exports.getJarakPesantren = (data, radius) =>
                             longitude: r[i].longitude,
                             nomorNspp: r[i].nomorNspp,
                             website: r[i].website,
+                            gambar_icon: r[i].gambar_icon,
+                            profile: r[i].profile,
+                            info: r[i].info,
+                            pendidikan: r[i].pendidikan,
+                            ekskul: r[i].ekskul,
+                            pemilik: r[i].pemilik,
                         })
                     }
                 }
